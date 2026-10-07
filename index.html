@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>サタスペ-亜俠駒変換所-</title>
+
+    <style>
+
+        /* ========================================
+           基本設定
+        ======================================== */
+
+        :root {
+            --paper: #f3eee2;
+            --paper-dark: #e4dccb;
+            --ink: #292722;
+            --ink-light: #625d53;
+            --accent: #6e6860;
+            --accent-dark: #48443e;
+            --line: #aaa292;
+            --red: #8a5048;
+            --success: #e6eee1;
+            --error: #f1dfdc;
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+            padding: 30px 15px 60px;
+
+            font-family:
+                "Hiragino Kaku Gothic ProN",
+                "Yu Gothic",
+                "Meiryo",
+                sans-serif;
+
+            color: var(--ink);
+            line-height: 1.7;
+            position: relative;
+
+            /* 紙っぽい背景 */
+            background-color: var(--paper);
+
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(80, 70, 50, 0.025) 0px,
+                    rgba(80, 70, 50, 0.025) 1px,
+                    transparent 1px,
+                    transparent 4px
+                ),
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(120, 100, 70, 0.07),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 70%,
+                    rgba(120, 100, 70, 0.05),
+                    transparent 35%
+                );
+        }
+
+
+        /* ========================================
+           メインの紙
+        ======================================== */
+
+        .paper {
+            position: relative;
+
+            width: min(900px, 100%);
+            margin: 0 auto;
+
+            padding: 30px clamp(18px, 5vw, 50px);
+
+            background: rgba(247, 243, 233, 0.94);
+
+            border: 1px solid rgba(70, 65, 55, 0.25);
+
+            box-shadow:
+                3px 4px 0 rgba(50, 45, 35, 0.12),
+                0 10px 25px rgba(40, 35, 25, 0.08);
+        }
+
+        /* ========================================
+           ヘッダー
+        ======================================== */
+
+        .site-header {
+            position: relative;
+
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+
+            border-bottom: 3px double var(--ink);
+        }
+
+
+        .site-title {
+            margin: 0;
+
+            font-family:
+                "Hiragino Mincho ProN",
+                "Yu Mincho",
+                "Meiryo",
+                serif;
+
+            font-size: clamp(1.7rem, 6vw, 2.7rem);
+            line-height: 1.2;
+
+            letter-spacing: 0.08em;
+        }
+
+
+        .site-title-sub {
+            margin-top: 8px;
+
+            color: var(--ink-light);
+
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+        }
+
+
+        /*
+         * 「怪しげなチラシ」っぽい小さな印
+         */
+        .sticker {
+            display: inline-block;
+
+            margin-top: 15px;
+            padding: 3px 12px;
+
+            background: var(--accent-dark);
+            color: #f4f0e5;
+
+            font-size: 0.78rem;
+            font-weight: bold;
+
+            transform: rotate(-2deg);
+
+            box-shadow: 2px 2px 0 rgba(40, 35, 30, 0.2);
+        }
+
+
+        /* ========================================
+           セクション
+        ======================================== */
+
+        .section {
+            position: relative;
+
+            margin: 28px 0;
+            padding: 22px;
+
+            border: 1px solid var(--line);
+
+            background: rgba(255, 252, 244, 0.65);
+        }
+
+
+        .section-title {
+            display: inline-block;
+
+            margin: -38px 0 18px -10px;
+            padding: 5px 15px;
+
+            background: var(--paper-dark);
+
+            border: 1px solid rgba(70, 65, 55, 0.3);
+
+            font-family:
+                "Hiragino Mincho ProN",
+                "Yu Mincho",
+                serif;
+
+            font-size: 1.15rem;
+            font-weight: bold;
+
+            transform: rotate(-1deg);
+
+            box-shadow: 2px 2px 0 rgba(50, 45, 35, 0.12);
+        }
+
+
+        /* ========================================
+           【依頼受付】
+        ======================================== */
+
+        .request-section {
+            background:
+                linear-gradient(
+                    rgba(255, 252, 244, 0.88),
+                    rgba(255, 252, 244, 0.88)
+                );
+        }
+
+
+        .request-title {
+            font-size: 1.4rem;
+        }
+
+
+        .request-description {
+            margin-top: 0;
+
+            color: var(--ink-light);
+
+            font-size: 0.92rem;
+        }
+
+        .usage-guide {
+            margin-top: 24px;
+            padding: 14px 16px;
+
+            border: 1px dashed var(--line);
+            background: rgba(228, 220, 203, 0.28);
+        }
+
+        .usage-guide-title {
+            margin: 0 0 8px;
+
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 0.08em;
+        }
+
+        .usage-guide-list {
+            margin: 0;
+            padding-left: 1.5em;
+
+            color: var(--ink-light);
+            font-size: 0.85rem;
+        }
+
+        .usage-guide-list li {
+            padding: 2px 0;
+        }
+
+
+        .url-label {
+            display: block;
+
+            margin-top: 20px;
+            margin-bottom: 5px;
+
+            font-weight: bold;
+        }
+
+
+        input[type="text"] {
+            display: block;
+
+            width: 100%;
+
+            padding: 12px 13px;
+
+            border: 1px solid #999183;
+
+            border-radius: 0;
+
+            background: #fffdf7;
+
+            color: var(--ink);
+
+            font-size: 0.95rem;
+
+            box-shadow:
+                inset 0 1px 3px rgba(50, 45, 35, 0.08);
+
+            transition:
+                border-color 0.15s ease,
+                box-shadow 0.15s ease;
+        }
+
+
+        input[type="text"]:focus {
+            outline: none;
+
+            border-color: var(--accent-dark);
+
+            box-shadow:
+                0 0 0 2px rgba(72, 68, 62, 0.12);
+        }
+
+
+        /* ========================================
+           ボタン
+        ======================================== */
+
+        button {
+            appearance: none;
+
+            border: 1px solid #4f4a43;
+
+            border-radius: 2px;
+
+            padding: 10px 18px;
+
+            background: var(--accent-dark);
+            color: #f7f3e8;
+
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                2px 2px 0 rgba(50, 45, 35, 0.2);
+
+            transition:
+                transform 0.1s ease,
+                box-shadow 0.1s ease,
+                background 0.1s ease;
+        }
+
+
+        button:hover {
+            background: #393631;
+        }
+
+
+        button:active {
+            transform: translate(1px, 1px);
+
+            box-shadow:
+                1px 1px 0 rgba(50, 45, 35, 0.2);
+        }
+
+
+        .load-button {
+            margin-top: 12px;
+
+            min-width: 120px;
+        }
+
+
+        /* ========================================
+           キャラクター情報
+        ======================================== */
+
+        .character-name {
+            margin-top: 0;
+            margin-bottom: 22px;
+            padding: 8px 10px 10px;
+
+            font-family:
+                "Hiragino Mincho ProN",
+                "Yu Mincho",
+                serif;
+
+            font-size: clamp(1.4rem, 5vw, 2rem);
+            line-height: 1.3;
+            letter-spacing: 0.05em;
+
+            border-top: 2px solid var(--ink);
+            border-bottom: 1px dashed var(--line);
+
+            background: rgba(255, 252, 244, 0.45);
+        }
+
+
+        .info-block {
+            margin-top: 22px;
+            padding: 14px 15px 12px;
+
+            border: 1px solid rgba(170, 162, 146, 0.8);
+            background: rgba(255, 252, 244, 0.55);
+        }
+
+
+        .info-block h3 {
+            margin: 0 0 8px;
+
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+
+            border-left: 5px solid var(--accent);
+            padding-left: 10px;
+        }
+
+
+        .stat-list {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 6px 20px;
+
+            margin: 0;
+            padding: 0;
+
+            list-style: none;
+        }
+
+
+        .stat-list li {
+            padding: 7px 8px;
+            border-bottom: 1px dotted var(--line);
+        }
+
+        .stat-list li:last-child {
+            border-bottom: none;
+        }
+
+
+        .stat-value {
+            float: right;
+
+            font-weight: bold;
+        }
+
+
+        /* ========================================
+           コピーエリア
+        ======================================== */
+
+        .copy-section {
+            margin-top: 35px;
+        }
+
+
+        .copy-description {
+            margin-top: -5px;
+
+            color: var(--ink-light);
+
+            font-size: 0.9rem;
+        }
+
+
+        .copy-buttons {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 10px;
+
+            margin-top: 18px;
+        }
+
+
+        .copy-button {
+            width: 100%;
+
+            min-height: 52px;
+
+            padding: 10px 12px;
+
+            text-align: left;
+
+            background: #f1ecdf;
+            color: var(--ink);
+
+            border-color: #918a7d;
+
+            box-shadow:
+                2px 2px 0 rgba(50, 45, 35, 0.12);
+        }
+
+
+        .copy-button:hover {
+            background: #e6dfd0;
+        }
+
+
+        /* ココフォリアJSONだけ少し目立たせる */
+        .copy-button.primary {
+            background: var(--accent-dark);
+            color: #f7f3e8;
+
+            border-color: var(--accent-dark);
+        }
+
+
+        .copy-button.primary:hover {
+            background: #393631;
+        }
+
+        /* ========================================
+        納品ボタンの説明
+        ======================================== */
+        .copy-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .copy-note {
+            margin: 4px 2px 0;
+            color: var(--ink-light);
+            font-size: 0.78rem;
+            line-height: 1.5;
+        }
+
+
+        /* ========================================
+           コピー完了メッセージ
+        ======================================== */
+
+        .message {
+            margin-top: 15px;
+
+            padding: 12px 14px;
+
+            border: 1px solid var(--line);
+
+            font-size: 0.9rem;
+        }
+
+
+        .success {
+            background: var(--success);
+        }
+
+
+        .error {
+            background: var(--error);
+
+            border-color: #c29b96;
+        }
+
+
+        /* ========================================
+           エラー
+        ======================================== */
+
+        /* ========================================
+        エラー表示
+        ======================================== */
+        .error-section {
+            border-color: #b89a95;
+            background:
+                linear-gradient(
+                    rgba(255, 248, 245, 0.82),
+                    rgba(255, 248, 245, 0.82)
+                );
+        }
+
+        .error-section .section-title {
+            background: #ead8d4;
+            color: #4a3936;
+        }
+
+        .error-lead {
+            margin: 0 0 10px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .error-help {
+            margin: 0;
+            color: var(--ink-light);
+            font-size: 0.9rem;
+        }
+
+        .error-message {
+            margin-top: 16px;
+            padding: 12px 14px;
+            border-left: 4px solid #9b665e;
+            background: rgba(234, 216, 212, 0.55);
+            font-size: 0.9rem;
+        }
+
+        .error-retry {
+            margin-top: 16px;
+        }
+
+        .error-causes {
+            margin: 18px 0 0;
+            padding: 12px 14px 12px 32px;
+            border: 1px dashed var(--line);
+            background: rgba(255, 252, 244, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .error-causes-title {
+            margin: 0 0 6px;
+            font-weight: bold;
+        }
+
+        .error-causes li {
+            margin: 3px 0;
+        }
+
+
+        /* ========================================
+           フッター
+        ======================================== */
+
+        .site-footer {
+            margin-top: 40px;
+            padding-top: 15px;
+
+            border-top: 1px solid var(--line);
+
+            color: var(--ink-light);
+
+            text-align: center;
+
+            font-size: 0.75rem;
+        }
+
+
+        /* ========================================
+           スマートフォン対応
+        ======================================== */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 10px 8px 50px;
+            }
+
+
+            .paper {
+                padding: 24px 16px 50px;
+            }
+
+
+            .site-header {
+                margin-bottom: 28px;
+            }
+
+
+            .section {
+                padding: 18px 14px;
+            }
+
+
+            .section-title {
+                margin-left: -5px;
+            }
+
+
+            .stat-list {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+
+            .copy-buttons {
+                grid-template-columns: 1fr;
+            }
+
+
+            button {
+                min-height: 48px;
+            }
+
+
+            input[type="text"] {
+                font-size: 16px;
+            }
+
+        }
+
+        /* =========================
+        サタスペ風ステッカー
+        ========================= */
+
+        .sticker {
+            position: absolute;
+            z-index: 10;
+
+            display: inline-block;
+            padding: 4px 10px;
+
+            font-family: sans-serif;
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 0.08em;
+
+            border: 2px solid #222;
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
+
+            transform: rotate(-4deg);
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .sticker-secret {
+            top: 25px;
+            left: 18px;
+
+            background: #f4ead2;
+            color: #222;
+
+            transform: rotate(-7deg);
+        }
+
+        .sticker-warning {
+            top: 75px;
+            right: 20px;
+
+            background: #e8d8a8;
+            color: #222;
+
+            transform: rotate(5deg);
+        }
+
+        .sticker-urgent {
+            top: 135px;
+            left: 25px;
+
+            background: #ddd4c0;
+            color: #222;
+
+            transform: rotate(-3deg);
+        }
+
+        /* スマートフォンでは少し小さくする */
+        @media (max-width: 600px) {
+
+            .sticker {
+                padding: 3px 7px;
+                font-size: 0.65rem;
+            }
+
+            .sticker-secret {
+                top: 12px;
+                left: 8px;
+            }
+
+            .sticker-warning {
+                top: 48px;
+                right: 8px;
+            }
+
+            .sticker-urgent {
+                top: 85px;
+                left: 12px;
+            }
+        }
+
+    </style>
+
+    <script>
+
+        // キャラクター読み込み後のページでF5された場合、
+        // URLから character-url を取り除いて初期画面に戻す
+        if (new URLSearchParams(window.location.search).has("character-url")) {
+
+            if (performance.getEntriesByType("navigation")[0]?.type === "reload") {
+
+                const url = new URL(window.location.href);
+                url.search = "";
+
+                window.location.replace(url.href);
+            }
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+<div class="paper">
+
+    <!-- =====================================
+         ヘッダー
+    ====================================== -->
+
+    <header class="site-header">
+
+        <h1 class="site-title">
+            サタスペ-亜俠駒変換所-
+        </h1>
+
+        <div class="site-title-sub">
+            SATASUPE × CCFOLIA CHARACTER CONVERTER
+        </div>
+
+        <div class="sticker">
+    
+            亜俠向け・駒作成受付中
+    
+        </div>
+
+
+
+    </header>
+
+
+    <!-- =====================================
+         【依頼受付】
+    ====================================== -->
+
+    <section class="section request-section">
+
+        <h2 class="section-title request-title">
+            【依頼受付】
+        </h2>
+
+        <p class="request-description">
+            キャラクターシート倉庫のサタスペキャラクターシートURLを
+            入力してください。
+        </p>
+
+        <form method="get">
+
+            <label
+                for="character-url"
+                class="url-label"
+            >
+                キャラクターシートURL
+            </label>
+
+            <input
+                type="text"
+                id="character-url"
+                name="character-url"
+                value="{{ character_url }}"
+                placeholder="https://character-sheets.appspot.com/satasupe/edit.html?key=..."
+            >
+
+            <button
+                type="submit"
+                class="load-button"
+            >
+                読み込む
+            </button>
+
+        </form>
+
+        <div class="usage-guide">
+            <p class="usage-guide-title">
+                【ご利用方法】
+            </p>
+
+            <ol class="usage-guide-list">
+                <li>キャラクターシート倉庫のURLを入力</li>
+                <li>「読み込む」を押す</li>
+                <li>必要なデータをコピー</li>
+                <li>ココフォリアに貼り付け</li>
+            </ol>
+        </div>        
+
+    </section>
+
+
+    <!-- =====================================
+         キャラクター情報
+    ====================================== -->
+
+    {% if converted_character %}
+
+        <section class="section">
+
+            <h2 class="section-title">
+                依頼品
+            </h2>
+
+            <h2 class="character-name">
+                {{ converted_character["name"] }}
+            </h2>
+
+
+            <div class="info-block">
+
+                <h3>能力値</h3>
+
+                <ul class="stat-list">
+
+                    <li>
+                        犯罪
+                        <span class="stat-value">
+                            {{ converted_character["abilities"]["犯罪"] }}
+                        </span>
+                    </li>
+
+                    <li>
+                        生活
+                        <span class="stat-value">
+                            {{ converted_character["abilities"]["生活"] }}
+                        </span>
+                    </li>
+
+                    <li>
+                        恋愛
+                        <span class="stat-value">
+                            {{ converted_character["abilities"]["恋愛"] }}
+                        </span>
+                    </li>
+
+                    <li>
+                        教養
+                        <span class="stat-value">
+                            {{ converted_character["abilities"]["教養"] }}
+                        </span>
+                    </li>
+
+                    <li>
+                        戦闘
+                        <span class="stat-value">
+                            {{ converted_character["abilities"]["戦闘"] }}
+                        </span>
+                    </li>
+
+                    <li>
+                        肉体
+                        <span class="stat-value">
+                            {{ converted_character["abilities"]["肉体"] }}
+                        </span>
+                    </li>
+
+                    <li>
+                        精神
+                        <span class="stat-value">
+                            {{ converted_character["abilities"]["精神"] }}
+                        </span>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="info-block">
+
+                <h3>戦闘力</h3>
+
+                <ul class="stat-list">
+
+                    <li>
+                        反応力
+                        <span class="stat-value">
+                            {{ converted_character["combat"]["反応力"] }}
+                        </span>
+                    </li>
+
+                    <li>
+                        攻撃力
+                        <span class="stat-value">
+                            {{ converted_character["combat"]["攻撃力"] }}
+                        </span>
+                    </li>
+
+                    <li>
+                        破壊力
+                        <span class="stat-value">
+                            {{ converted_character["combat"]["破壊力"] }}
+                        </span>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             コピー
+        ================================== -->
+
+        {% if ccfolia_json %}
+
+            <section class="section copy-section">
+
+                <h2 class="section-title">
+                    【納品】
+                </h2>
+
+                <p class="copy-description">
+                    必要なデータを選んでコピーしてください。
+                </p>
+
+                <div class="copy-buttons">
+
+                    <div class="copy-item">
+                        <button
+                            type="button"
+                            class="copy-button primary"
+                            id="copy-ccfolia-button"
+                        >
+                            亜俠情報をコピー
+                        </button>
+                        <p class="copy-note">
+                            キャラクター駒をココフォリアに貼り付けます。
+                        </p>
+                    </div>
+
+                    <div class="copy-item">
+                        <button
+                            type="button"
+                            class="copy-button"
+                            id="copy-inventory-button"
+                        >
+                            所持品・乗り物をコピー
+                        </button>
+                        <p class="copy-note">
+                            キャラクターの所持品と乗り物をコピーします。
+                        </p>
+                    </div>
+
+                    <div class="copy-item">
+                        <button
+                            type="button"
+                            class="copy-button"
+                            id="copy-home-button"
+                        >
+                            アジトをコピー
+                        </button>
+                        <p class="copy-note">
+                            アジトに置かれているアイテムをコピーします。
+                        </p>
+                    </div>
+
+                    <div class="copy-item">
+                        <button
+                            type="button"
+                            class="copy-button"
+                            id="copy-karma-button"
+                        >
+                            習得カルマ詳細をコピー
+                        </button>
+                        <p class="copy-note">
+                            習得カルマの使用・対象・判定・効果をコピーします。
+                        </p>
+                    </div>
+
+                </div>
+
+                <div
+                    id="copy-message"
+                    class="message"
+                    hidden
+                ></div>
+
+
+                <!--
+                    コピー対象の文字列は画面には表示しない。
+                    JavaScriptがコピーするときだけ使用する。
+                -->
+
+                <script
+                    id="ccfolia-json"
+                    type="application/json"
+                >
+                    {{ ccfolia_json | tojson }}
+                </script>
+
+
+                <script
+                    id="inventory-memo"
+                    type="application/json"
+                >
+                    {{ inventory_memo | tojson }}
+                </script>
+
+
+                <script
+                    id="home-memo"
+                    type="application/json"
+                >
+                    {{ home_memo | tojson }}
+                </script>
+
+
+                <script
+                    id="karma-detail-memo"
+                    type="application/json"
+                >
+                    {{ karma_detail_memo | tojson }}
+                </script>
+
+
+                <script>
+
+                    async function copyTextFromElement(
+                        elementId,
+                        successMessage
+                    ) {
+
+                        const element =
+                            document.getElementById(elementId);
+
+                        const messageElement =
+                            document.getElementById("copy-message");
+
+                        const text =
+                            JSON.parse(element.textContent);
+
+                        try {
+                            await navigator.clipboard.writeText(text);
+
+                            messageElement.hidden = false;
+                            messageElement.className =
+                                "message success";
+                            messageElement.textContent =
+                                successMessage;
+
+                            setTimeout(function () {
+                                messageElement.hidden = true;
+                            }, 3000);
+
+                        } catch (error) {
+
+                            messageElement.hidden = false;
+
+                            messageElement.className =
+                                "message error";
+
+                            messageElement.textContent =
+                                "クリップボードへのコピーに失敗しました。ブラウザの権限設定を確認してください。";
+
+                            console.error(error);
+
+                        }
+
+                    }
+
+
+                    document
+                        .getElementById("copy-ccfolia-button")
+                        .addEventListener(
+                            "click",
+                            function () {
+
+                                copyTextFromElement(
+                                    "ccfolia-json",
+                                    "ココフォリア用キャラクター駒をコピーしました。"
+                                );
+
+                            }
+                        );
+
+
+                    document
+                        .getElementById("copy-inventory-button")
+                        .addEventListener(
+                            "click",
+                            function () {
+
+                                copyTextFromElement(
+                                    "inventory-memo",
+                                    "所持品・乗り物をコピーしました。"
+                                );
+
+                            }
+                        );
+
+
+                    document
+                        .getElementById("copy-home-button")
+                        .addEventListener(
+                            "click",
+                            function () {
+
+                                copyTextFromElement(
+                                    "home-memo",
+                                    "アジトをコピーしました。"
+                                );
+
+                            }
+                        );
+
+
+                    document
+                        .getElementById("copy-karma-button")
+                        .addEventListener(
+                            "click",
+                            function () {
+
+                                copyTextFromElement(
+                                    "karma-detail-memo",
+                                    "習得カルマ詳細をコピーしました。"
+                                );
+
+                            }
+                        );
+
+                </script>
+
+            </section>
+
+        {% endif %}
+
+
+    {% elif character_data %}
+
+        <section class="section">
+
+            <h2 class="section-title">
+                確認
+            </h2>
+
+            <p>
+                キャラクターデータを受け取りましたが、
+                変換結果を作成できませんでした。
+            </p>
+
+        </section>
+
+
+    {% elif character_url %}
+
+        <section class="section">
+
+            <h2 class="section-title">
+                確認
+            </h2>
+
+            <p>
+                キャラクターデータはありません。
+            </p>
+
+        </section>
+
+    {% endif %}
+
+
+    <!-- =====================================
+         エラー
+    ====================================== -->
+
+    {% if error_message %}
+        <section class="section error-section">
+            <h2 class="section-title">
+                読み込み失敗
+            </h2>
+
+            <p class="error-lead">
+                キャラクターシートを読み込めませんでした。
+            </p>
+
+            <p class="error-help">
+                入力したURLを確認して、もう一度お試しください。
+            </p>
+
+            <div class="error-causes">
+                <p class="error-causes-title">
+                    考えられる原因
+                </p>
+
+                <ul>
+                    <li>キャラクターシートURLが正しく入力されていない</li>
+                    <li>キャラクターシートが公開されていない</li>
+                    <li>キャラクターシート倉庫側で一時的に読み込めない</li>
+                </ul>
+            </div>
+
+            <div class="error-message">
+                {{ error_message }}
+            </div>
+
+            <button
+                type="button"
+                class="error-retry"
+                onclick="document.getElementById('character-url').focus();"
+            >
+                URLを確認する
+            </button>
+        </section>
+    {% endif %}
+
+
+    <!-- =====================================
+         フッター
+    ====================================== -->
+
+    <footer class="site-footer">
+        サタスペ-亜俠駒変換所-
+    </footer>
+
+</div>
+
+</body>
+</html>
