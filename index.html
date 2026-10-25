@@ -808,31 +808,37 @@
             入力してください。
         </p>
 
-        <form method="get">
-
+        <div>
+        
             <label
                 for="character-url"
                 class="url-label"
             >
                 キャラクターシートURL
             </label>
-
+        
             <input
                 type="text"
                 id="character-url"
                 name="character-url"
-                value="{{ character_url }}"
                 placeholder="https://character-sheets.appspot.com/satasupe/edit.html?key=..."
             >
-
+        
             <button
-                type="submit"
+                type="button"
+                id="load-character-button"
                 class="load-button"
             >
                 読み込む
             </button>
-
-        </form>
+        
+            <div
+                id="load-message"
+                class="message"
+                hidden
+            ></div>
+        
+        </div>
 
         <div class="usage-guide">
             <p class="usage-guide-title">
