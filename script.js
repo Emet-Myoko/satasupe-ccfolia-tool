@@ -22,7 +22,7 @@ async function loadCharacter() {
 
     const button =
         document.getElementById(
-            "load-character-button"
+            "load-button"
         );
 
     const message =
@@ -208,7 +208,7 @@ async function loadCharacter() {
 
 document
     .getElementById(
-        "load-character-button"
+        "load-button"
     )
     .addEventListener(
         "click",
