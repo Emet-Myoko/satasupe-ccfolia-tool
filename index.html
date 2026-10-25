@@ -810,6 +810,9 @@
 
         <div>
         
+
+        <form id="character-form">
+        
             <label
                 for="character-url"
                 class="url-label"
@@ -826,11 +829,15 @@
         
             <button
                 type="button"
-                id="load-character-button"
+                id="load-button"
                 class="load-button"
             >
                 読み込む
             </button>
+        
+            <p id="load-message" role="status" aria-live="polite"></p>
+        
+        </form>
         
             <div
                 id="load-message"
